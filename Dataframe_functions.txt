@@ -1,0 +1,39 @@
+import pandas as pd
+import numpy as np
+# Create a dataframe with 50 rows and 3 columns
+df = pd.DataFrame(np.random.rand(50, 3))
+df
+# Replace 10% of the values with null values
+df = df.mask(np.random.random(df.shape) < 0.1)
+df
+# a. Identify and count missing values in a dataframe
+missing_values_count = df.isnull().sum().sum()
+print(f"Number of missing values in the dataframe: {missing_values_count}")
+# b. Drop the column having more than 5 null values
+df = df.dropna(thresh=len(df) - 5, axis=1)
+df
+# c. Identify the row label having maximum of the sum of all values in a row and drop that row
+max_sum_row = df.sum(axis=1).idxmax()
+df = df.drop(max_sum_row)
+df
+
+# d. Sort the dataframe on the basis of the first column
+df = df.sort_values(by=[0])
+df
+# e. Remove all duplicates from the first column
+df = df.drop_duplicates(subset=[0])
+df
+
+# f. Find the correlation between first and second column and covariance between second and third column
+correlation = df.corr().iloc[0, 1]
+covariance = df.cov().iloc[1, 2]
+print(f"Correlation between first and second column: {correlation}")
+print(f"Covariance between second and third column: {covariance}")
+
+# g. Detect the outliers and remove the rows having outliers
+df = df[(np.abs(df - df.mean()) / df.std()) < 3].dropna()
+df
+# h. Discretize second column and create 5 bins
+df[1] = pd.qcut(df[1], q=5, labels=False)
+df
+print(df)

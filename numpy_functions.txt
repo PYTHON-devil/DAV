@@ -1,0 +1,81 @@
+a)	
+import numpy as np
+# Generate a 2D random integer array
+random_array = np.random.randint(1, 100, size=(3, 4))
+
+# Compute mean, standard deviation, and variance along the second axis
+mean_values = np.mean(random_array, axis=1)
+std_deviation_values = np.std(random_array, axis=1)
+variance_values = np.var(random_array, axis=1)
+
+print("Original Array:")
+print(random_array)
+print("\nMean along the second axis:")
+print(mean_values)
+print("\nStandard Deviation along the second axis:")
+print(std_deviation_values)
+print("\nVariance along the second axis:")
+print(variance_values)
+
+
+b)
+import numpy as np
+
+# Given array
+B = np.array([56, 48, 22, 41, 78, 91, 24, 46, 8, 33])
+
+# Get indices of sorted elements
+sorted_indices = np.argsort(B)
+
+print("Given Array:")
+print(B)
+print("\nIndices of Sorted Elements:")
+print(sorted_indices)
+
+
+c)
+import numpy as np
+
+# User inputs for m and n
+m = int(input("Enter the number of rows (m): "))
+n = int(input("Enter the number of columns (n): "))
+
+# Create a 2D array of size m x n with random integer elements
+original_array = np.random.randint(1, 100, size=(m, n))
+
+# Print shape, type, and data type of the original array
+print("\nOriginal Array:")
+print(original_array)
+print("\nShape of the Array:", original_array.shape)
+print("Type of the Array:", type(original_array))
+print("Data Type of the Array:", original_array.dtype)
+
+# Reshape the array into nxm array
+reshaped_array = original_array.reshape((n, m))
+
+# Print the reshaped array
+print("\nReshaped Array (nxm):")
+print(reshaped_array)
+
+
+d)
+import numpy as np
+
+# Given array
+given_array = np.array([1.0, 0.0, 3.5, np.nan, 0.0, 7.2, np.nan, 9.8])
+
+# Test for zero, non-zero, and NaN elements
+zero_indices = np.where(given_array == 0)[0]
+non_zero_indices = np.where(given_array != 0)[0]
+nan_indices = np.where(np.isnan(given_array))[0]
+
+print("Given Array:")
+print(given_array)
+print("\nIndices of Zero Elements:")
+print(zero_indices)
+print("\nIndices of Non-Zero Elements:")
+print(non_zero_indices)
+print("\nIndices of NaN Elements:")
+print(nan_indices)
+
+

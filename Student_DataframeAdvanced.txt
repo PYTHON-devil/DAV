@@ -1,0 +1,31 @@
+ import pandas as pd
+
+# Your provided data
+data = {
+    'Name': ['Mudit Chauhan', 'Seema Chopra', 'Rani Gupta', 'Aditya Narayan', 'Sanjeev Sahni',
+             'Prakash Kumar', 'Ritu Agarwal', 'Akshay Goel', 'Meeta Kulkarni', 'Preeti Ahuja',
+             'Sunil Das Gupta', 'Sonali Sapre', 'Rashmi Talwar', 'Ashish Dubey', 'Kiran Sharma', 'Sameer Bansal'],
+    'Birth_Month': ['December', 'January', 'March', 'October', 'February', 'December', 'September',
+                    'August', 'July', 'November', 'April', 'January', 'June', 'May', 'February', 'October'],
+    'Gender': ['M', 'F', 'F', 'M', 'M', 'M', 'F', 'M', 'F', 'F', 'M', 'F', 'F', 'M', 'F', 'M'],
+    'Pass_Division': ['III', 'II', 'I', 'I', 'II', 'III', 'I', 'I', 'II', 'II', 'III', 'I', 'III', 'II', 'II', 'I']
+}
+
+df = pd.DataFrame(data)
+
+# a. Perform one hot encoding of the last two columns of categorical data using the get_dummies() function.
+df_encoded = pd.get_dummies(df, columns=['Gender', 'Pass_Division'])
+
+# b. Sort this data frame on the “Birth Month” column.
+# Convert 'Birth_Month' to Categorical with custom order
+month_order = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+df_encoded['Birth_Month'] = pd.Categorical(df_encoded['Birth_Month'], categories=month_order, ordered=True)
+
+# Sort the DataFrame based on 'Birth_Month'
+df_sorted = df_encoded.sort_values(by='Birth_Month')
+
+# Display the results
+print("a. DataFrame after one-hot encoding:")
+print(df_encoded)
+print("\nb. DataFrame sorted on the 'Birth Month' column:")
+print(df_sorted)

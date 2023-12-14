@@ -1,0 +1,10 @@
+Dictionary={"Boys":[72,68,70,69,74],"Girls":[63,65,69,61,62]}
+List1=[]
+key1="Boys"
+key2="Girls"
+List1=Dictionary["Boys"]
+List2=Dictionary["Girls"]
+List3=[]
+for x in range(len(List1)):
+    List3.append({key1:List1[x],key2:List2[x]})
+List3

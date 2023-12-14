@@ -1,0 +1,23 @@
+
+import numpy as np import pandas as pd 
+dfDay1 = pd.read_excel('F:\CS\sem 5\Data Analysis and Visualisation\Practicals\Day1_register. dfDay2 = pd.read_excel('F:\CS\sem 5\Data Analysis and Visualisation\Practicals\Day2_register. 
+dfDay1, dfDay2
+
+#a 
+merged=pd.merge(dfDay1,dfDay2,how='inner',on='Name') 
+merged
+
+
+#b
+either_day = pd.merge(dfDay1,dfDay2,how='outer',on='Name') 
+either_day 
+
+
+C)
+either_day['Name'].count() 
+
+D)
+both_days = pd.merge(dfDay1,dfDay2,how='outer',on=['Name','Duration']).copy() # creates a co both_days.fillna(value='-',inplace=True) # to fill out the missing values in the given series both_days.set_index(['Name','Duration']) # a method to set a List as index of a Data Frame 
+
+
+

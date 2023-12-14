@@ -1,0 +1,42 @@
+import pandas as pd
+import numpy as np
+
+# Creating a sample dataset
+data = {
+    'Date': pd.date_range(start='2022-01-01', end='2022-01-10', freq='D').tolist() +
+            pd.date_range(start='2022-01-15', end='2022-01-25', freq='D').tolist(),
+    'Product': ['A'] * 10 + ['B'] * 11,
+    'Sales': [100, 120, 80, 110, 90, np.nan, 130, 150, 140, 120, 200, 180, 160, 190, np.nan, 210, 220, 230, 240, 250, 260]
+}
+
+df = pd.DataFrame(data)
+
+# a. Compute mean of a series grouped by another series
+mean_sales_by_product = df.groupby('Product')['Sales'].mean()
+print("a. Mean sales by product:")
+print(mean_sales_by_product)
+
+# b. Fill an intermittent time series to replace all missing dates with values of previous non-missing date.
+df_filled = df.set_index('Date').asfreq('D').ffill()
+print("\nb. DataFrame after filling missing dates:")
+print(df_filled)
+
+# c. Perform appropriate year-month string to dates conversion.
+df['YearMonth'] = pd.to_datetime(df['Date']).dt.to_period('M')
+print("\nc. DataFrame with YearMonth column:")
+print(df)
+
+# d. Split a dataset to group by two columns and then sort the aggregated results within the groups.
+sorted_sales_by_product = df.groupby(['Product', 'YearMonth']).agg({'Sales': 'mean'}).sort_values(by=['Product', 'YearMonth'])
+print("\nd. Sorted sales by product and year-month:")
+print(sorted_sales_by_product)
+
+# e. Split a given dataframe into groups with bin counts.
+bin_counts = 3
+df['SalesBin'] = pd.cut(df['Sales'], bins=bin_counts)
+grouped_by_bins = df.groupby('SalesBin')
+print("\ne. Dataframe split into groups with bin counts:")
+for name, group in grouped_by_bins:
+    print(f"Bin: {name}")
+    print(group)
+    print("\n")
